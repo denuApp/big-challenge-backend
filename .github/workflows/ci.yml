@@ -74,7 +74,7 @@ jobs:
         # Set environment
         env:
           DB_CONNECTION: pgsql
-          DB_HOST: pgsql
+          DB_HOST: postgres
           DB_PORT: 5432
           DB_DATABASE: big_challenge
           DB_USERNAME: sail
