@@ -60,6 +60,4 @@ class RegisterUserTest extends TestCase
                 'password' => $password,
             ]);
     }
-
-    
 }
