@@ -19,11 +19,9 @@ class UserRegistrationRequest extends FormRequest
     public function rules() : array
     {
         return [
-          request()->validate([
-                'name' => ['required', 'max:30'],
-                'email' => ['required', 'max:30'],
-                'password' => ['required', 'min:6'],
-            ]),
+            'name' => ['required', 'min:3', 'max:30'],
+            'email' => ['required', 'max:30', 'email'],
+            'password' => ['required', 'min:6'],
         ];
     }
 }

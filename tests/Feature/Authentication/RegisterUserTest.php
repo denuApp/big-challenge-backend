@@ -33,4 +33,33 @@ class RegisterUserTest extends TestCase
             )
             ->assertSuccessful();
     }
+
+    public function test_the_controller_register_user_correctly_without_name()
+    {
+        $this->withoutExceptionHandling();
+
+        $name = 'juan';
+        $email = 'juan@juan.com';
+        $password = '1234Juan.';
+
+        $this
+            ->postJson(
+                'api/register-user',
+                [
+                    'name' => $name,
+                    'email' => $email,
+                    'password' => $password,
+                ]
+            )
+            ->assertSuccessful();
+
+        $this
+            ->assertDatabaseHas('users', [
+                'name' => $name,
+                'email' => $email,
+                'password' => $password,
+            ]);
+    }
+
+    
 }
