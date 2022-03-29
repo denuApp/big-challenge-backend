@@ -22,8 +22,8 @@ class UserRegistrationRequest extends FormRequest
           request()->validate([
                 'name' => ['required', 'max:30'],
                 'email' => ['required', 'max:30'],
-                'password' => ['required', 'min:6']
-            ])
+                'password' => ['required', 'min:6'],
+            ]),
         ];
     }
 }

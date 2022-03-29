@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRegistrationRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Validation\Rule;
 
 class RegisterUserController extends Controller
 {

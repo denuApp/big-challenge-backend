@@ -2,7 +2,6 @@
 
 namespace Tests\Authentication\Feature;
 
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,19 +18,19 @@ class RegisterUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $name = "juan";
-        $email = "juan@juan.com";
-        $password = "1234Juan.";
+        $name = 'juan';
+        $email = 'juan@juan.com';
+        $password = '1234Juan.';
 
         $this
-            ->postJson('api/register-user',
+            ->postJson(
+                'api/register-user',
                 [
                     'name' => $name,
                     'email' => $email,
-                    'password' => $password
+                    'password' => $password,
                 ]
             )
             ->assertSuccessful();
-
     }
 }
