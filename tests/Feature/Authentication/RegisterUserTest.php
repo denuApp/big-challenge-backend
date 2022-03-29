@@ -61,66 +61,57 @@ class RegisterUserTest extends TestCase
             ]);
     }
 
-
     /**
      * @dataProvider invalidUserProvider
      */
     public function test_invalid_users_registration($user)
     {
         $this
-            ->postJson(  'api/register-user',$user)
+            ->postJson('api/register-user', $user)
             ->assertUnprocessable();
     }
 
-    public function invalidUserProvider (): array
+    public function invalidUserProvider(): array
     {
         return [
-            ['empty name' =>
-            [
+            ['empty name' => [
                 'email' => 'juan@juan.com',
-                'password' => '1234Juan.'
+                'password' => '1234Juan.',
             ]],
-            ['empty name' =>
-            [
+            ['empty name' => [
                 'name' => 'juan',
-                'password' => '1234Juan.'
+                'password' => '1234Juan.',
             ]],
-            ['empty password' =>
-            [
+            ['empty password' => [
                 'name' => 'juan',
                 'email' => 'juan@juan.com',
             ]],
-            ['name too short' =>
-            [
+            ['name too short' => [
                 'name' => 'ju',
                 'email' => 'juan@juan.com',
-                'password' => '1234Juan.'
+                'password' => '1234Juan.',
             ]],
-            ['password too short' =>
-            [
+            ['password too short' => [
                 'name' => 'juan',
                 'email' => 'juan@juan.com',
-                'password' => '123'
-            ]
+                'password' => '123',
             ],
-            ['name too long' =>
-            [
+            ],
+            ['name too long' => [
                 'name' => 'juan rodriguez zlotejablko',
                 'email' => 'juan@juan.com',
-                'password' => '1234Juan.'
+                'password' => '1234Juan.',
             ]],
-            ['email too long' =>
-                [
+            ['email too long' => [
                     'name' => 'juan ',
                     'email' => 'juan_rodriguez_zlotejablko@juan.com',
-                    'password' => '1234Juan.'
+                    'password' => '1234Juan.',
                 ]],
-            ['invalid email' =>
-            [
+            ['invalid email' => [
                 'name' => 'juan ',
                 'email' => 'juan@juan',
-                'password' => '1234Juan.'
-            ]]
+                'password' => '1234Juan.',
+            ]],
 
         ];
     }
