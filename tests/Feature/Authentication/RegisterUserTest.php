@@ -41,8 +41,6 @@ class RegisterUserTest extends TestCase
             ]);
     }
 
-   
-
     /**
      * @dataProvider invalidUserProvider
      */
