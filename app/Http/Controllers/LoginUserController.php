@@ -10,28 +10,25 @@ class LoginUserController extends Controller
 {
     public function __invoke(UserLoginRequest $request): JsonResponse
     {
-        $user = User::where('email' , '=', $request['email'])->first();
+        $user = User::where('email', '=', $request['email'])->first();
 
-        if(isset($user)){
-            if($user->password === $request['password']){
+        if (isset($user)) {
+            if ($user->password === $request['password']) {
                 return response()->json([
                     'status' => 200,
                     'message' => 'Welcome back!',
                 ]);
-            }
-            else{
+            } else {
                 return response()->json([
                     'status' => 200,
                     'message' => 'Wrong email or password!',
                 ]);
             }
-        }else{
+        } else {
             return response()->json([
                 'status' => 200,
                 'message' => 'Wrong email or password!',
             ]);
         }
-
-
     }
 }

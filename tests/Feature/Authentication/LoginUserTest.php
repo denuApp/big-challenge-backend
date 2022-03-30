@@ -6,10 +6,8 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-
 class LoginUserTest extends TestCase
 {
-
     use RefreshDatabase;
 
     public function test_login_of_an_user()
@@ -19,11 +17,13 @@ class LoginUserTest extends TestCase
         $user = User::factory()->create();
 
         $this
-            ->postJson('api/login-user',
-            [
+            ->postJson(
+                'api/login-user',
+                [
                 'email' => $user['email'],
-                'password' => $user['password']
-            ])
+                'password' => $user['password'],
+            ]
+            )
             ->assertSuccessful();
     }
 
@@ -34,14 +34,13 @@ class LoginUserTest extends TestCase
     {
         User::factory()->create([
             'email' => 'good@email.com',
-            'password' => '123password'
+            'password' => '123password',
         ]);
 
         $this
-            ->postJson('api/login-user', [ 'email' => $user['email'],
-                'password' => $user['password']])
+            ->postJson('api/login-user', ['email' => $user['email'],
+                'password' => $user['password'], ])
             ->assertSeeText('Wrong email or password!');
-
     }
 
     /**
@@ -49,11 +48,9 @@ class LoginUserTest extends TestCase
      */
     public function test_invalid_format_users_login($user)
     {
-
         $this
-            ->postJson('api/login-user',$user)
+            ->postJson('api/login-user', $user)
             ->assertUnprocessable();
-
     }
 
     public function invalidLoginProvider(): array
@@ -62,12 +59,12 @@ class LoginUserTest extends TestCase
 
             ['incorrect email' => [
                 'email' => 'wrong@email.com',
-                'password' => '123password'
+                'password' => '123password',
             ]],
             ['incorrect password' => [
                 'email' => 'good@email.com',
-                'password' => '123wrongpassword'
-            ]]
+                'password' => '123wrongpassword',
+            ]],
         ];
     }
 
@@ -76,16 +73,13 @@ class LoginUserTest extends TestCase
         return [
             ['incorrect email format' => [
                 'email' => 'good@email',
-                'password' => '123password'
+                'password' => '123password',
             ]],
             ['incorrect password format' => [
                 'email' => 'good@email.com',
-                'password' => '123'
+                'password' => '123',
             ]],
 
         ];
     }
-
-
-
 }
