@@ -26,7 +26,7 @@ class UserRegistrationRequest extends FormRequest
         ];
     }
 
-    protected function prepareForValidation()
+    protected function PassedValidation()
     {
         return $this->merge(['password' => Hash::make($this->input('password'))]);
     }
