@@ -23,15 +23,6 @@ class LoginUserTest extends TestCase
             ])
             ->assertSuccessful();
 
-//        $this
-//            ->postJson(
-//                'api/login-user',
-//                [
-//                'email' => $user['email'],
-//                'password' => $user['password'],
-//            ]
-//            )
-//            ->assertSuccessful();
     }
 
     /**
@@ -50,10 +41,6 @@ class LoginUserTest extends TestCase
             ])
             ->assertUnprocessable();
 
-//        $this
-//            ->postJson('api/login-user', ['email' => $user['email'],
-//                'password' => $user['password'], ])
-//            ->assertSeeText('Wrong email or password!');
     }
 
     /**

@@ -13,8 +13,6 @@ class RegisterUserController extends Controller
         $request['password'] = bcrypt($request['password']);
         User::create($request->validated());
 
-        dd($request);
-
         return response()->json([
             'status' => 200,
             'message' => 'New user added successfully!',
