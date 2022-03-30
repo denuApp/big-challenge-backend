@@ -4,7 +4,6 @@ namespace Tests\Authentication\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class LoginUserTest extends TestCase
