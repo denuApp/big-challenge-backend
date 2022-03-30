@@ -10,7 +10,10 @@ class RegisterUserController extends Controller
 {
     public function __invoke(UserRegistrationRequest $request): JsonResponse
     {
+        $request['password'] = bcrypt($request['password']);
         User::create($request->validated());
+
+        dd($request);
 
         return response()->json([
             'status' => 200,
