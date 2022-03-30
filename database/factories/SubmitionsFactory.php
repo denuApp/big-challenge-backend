@@ -21,7 +21,7 @@ class SubmitionsFactory extends Factory
             'patient_id' => User::factory()->create(),
             'doctor_id' => User::factory()->create(),
             'symptoms' => $this->faker->text,
-            'prescription' => $this->faker->text
+            'prescription' => $this->faker->text,
         ];
     }
 }

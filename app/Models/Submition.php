@@ -9,11 +9,13 @@ class Submition extends Model
 {
     use HasFactory;
 
-    public function patient (){
+    public function patient()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function doctors (){
+    public function doctors()
+    {
         return $this->belongsTo(User::class);
     }
 }
