@@ -22,7 +22,6 @@ class LoginUserTest extends TestCase
                 'password' => $user['password'],
             ])
             ->assertSuccessful();
-
     }
 
     /**
@@ -40,7 +39,6 @@ class LoginUserTest extends TestCase
             'password' => $user['password'],
             ])
             ->assertUnprocessable();
-
     }
 
     /**

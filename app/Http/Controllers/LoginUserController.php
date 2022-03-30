@@ -11,7 +11,6 @@ class LoginUserController extends Controller
 {
     public function __invoke(UserLoginRequest $request): JsonResponse
     {
-
         $user = User::where('email', $request['email'])->first();
 
         if (! $user || ! ($request['password'] === $user->password)) {
@@ -25,6 +24,5 @@ class LoginUserController extends Controller
             'message' => 'Welcome back!',
             'token' => $user->createToken($request['email'])->plainTextToken,
         ]);
-
     }
 }
