@@ -25,9 +25,4 @@ class UserRegistrationRequest extends FormRequest
             'password' => ['required', 'min:6'],
         ];
     }
-
-    protected function PassedValidation()
-    {
-        return $this->merge(['password' => Hash::make($this->input('password'))]);
-    }
 }
