@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserLoginRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class LoginUserController extends Controller
@@ -13,7 +14,7 @@ class LoginUserController extends Controller
     {
         $user = User::where('email', $request['email'])->first();
 
-        if (! $user || ! ($request['password'] === $user->password)) {
+        if (! $user || !  Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);

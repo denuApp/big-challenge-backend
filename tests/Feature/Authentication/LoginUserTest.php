@@ -4,6 +4,7 @@ namespace Tests\Authentication\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class LoginUserTest extends TestCase
@@ -19,7 +20,7 @@ class LoginUserTest extends TestCase
         $this
             ->postJson('api/login-user', [
                 'email' => $user['email'],
-                'password' => $user['password'],
+                'password' => '123456password',
             ])
             ->assertSuccessful();
     }

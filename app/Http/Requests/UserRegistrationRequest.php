@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserRegistrationRequest extends FormRequest
 {
@@ -23,5 +24,10 @@ class UserRegistrationRequest extends FormRequest
             'email' => ['required', 'max:30', 'email:strict'],
             'password' => ['required', 'min:6'],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        return $this->merge(['password' => Hash::make($this->input('password'))]);
     }
 }
