@@ -17,14 +17,21 @@ class LoginUserTest extends TestCase
         $user = User::factory()->create();
 
         $this
-            ->postJson(
-                'api/login-user',
-                [
+            ->postJson('api/login-user', [
                 'email' => $user['email'],
                 'password' => $user['password'],
-            ]
-            )
+            ])
             ->assertSuccessful();
+
+//        $this
+//            ->postJson(
+//                'api/login-user',
+//                [
+//                'email' => $user['email'],
+//                'password' => $user['password'],
+//            ]
+//            )
+//            ->assertSuccessful();
     }
 
     /**
@@ -37,10 +44,17 @@ class LoginUserTest extends TestCase
             'password' => '123password',
         ]);
 
-        $this
-            ->postJson('api/login-user', ['email' => $user['email'],
-                'password' => $user['password'], ])
-            ->assertSeeText('Wrong email or password!');
+        $this->postJson('api/login-user', [
+            'email' => $user['email'],
+            'password' => $user['password']
+            ])
+            ->assertUnprocessable();
+
+
+//        $this
+//            ->postJson('api/login-user', ['email' => $user['email'],
+//                'password' => $user['password'], ])
+//            ->assertSeeText('Wrong email or password!');
     }
 
     /**
