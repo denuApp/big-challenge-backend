@@ -46,10 +46,9 @@ class LoginUserTest extends TestCase
 
         $this->postJson('api/login-user', [
             'email' => $user['email'],
-            'password' => $user['password']
+            'password' => $user['password'],
             ])
             ->assertUnprocessable();
-
 
 //        $this
 //            ->postJson('api/login-user', ['email' => $user['email'],
