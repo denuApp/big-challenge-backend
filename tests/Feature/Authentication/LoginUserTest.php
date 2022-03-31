@@ -12,6 +12,8 @@ class LoginUserTest extends TestCase
 
     public function test_login_of_an_user()
     {
+//        $this->artisan('db:seed');
+
         $this->withoutExceptionHandling();
 
         $user = User::factory()->create();
@@ -20,6 +22,7 @@ class LoginUserTest extends TestCase
             ->postJson('api/login-user', [
                 'email' => $user['email'],
                 'password' => '123456password',
+
             ])
             ->assertSuccessful();
     }
