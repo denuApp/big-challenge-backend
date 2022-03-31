@@ -13,8 +13,6 @@ class UserPermissionsSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         $patient = Role::create(['name' => 'patient']);
-//        $patient->givePermissionTo('edit articles');
-
         $doctor = Role::create(['name' => 'doctor']);
     }
 }
