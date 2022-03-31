@@ -12,8 +12,6 @@ class LoginUserTest extends TestCase
 
     public function test_login_of_an_user()
     {
-//        $this->artisan('db:seed');
-
         $this->withoutExceptionHandling();
 
         $user = User::factory()->create();
