@@ -20,6 +20,7 @@ class LoginUserTest extends TestCase
             ->postJson('api/login-user', [
                 'email' => $user['email'],
                 'password' => '123456password',
+
             ])
             ->assertSuccessful();
     }

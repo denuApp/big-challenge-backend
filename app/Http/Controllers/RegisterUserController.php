@@ -15,6 +15,8 @@ class RegisterUserController extends Controller
 
         $user = User::create($request->validated());
 
+        $user->assignRole($request['roles']);
+
         return new UserResource($user);
     }
 }

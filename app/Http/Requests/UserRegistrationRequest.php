@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserRegistrationRequest extends FormRequest
 {
@@ -17,6 +18,7 @@ class UserRegistrationRequest extends FormRequest
             'name' => ['required', 'min:3', 'max:20'],
             'email' => ['required', 'max:30', 'email:strict'],
             'password' => ['required', 'min:6'],
+            'roles' => ['required', Rule::in(['doctor', 'patient'])],
         ];
     }
 }
