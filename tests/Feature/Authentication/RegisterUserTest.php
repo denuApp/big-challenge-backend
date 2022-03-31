@@ -3,7 +3,9 @@
 namespace Tests\Authentication\Feature;
 
 use Database\Seeders\UserPermissionsSeeder;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class RegisterUserTest extends TestCase
@@ -18,6 +20,7 @@ class RegisterUserTest extends TestCase
     public function test_the_controller_register_user_correctly()
     {
         $this->withoutExceptionHandling();
+        Event::fake();
 
         $this->seed(UserPermissionsSeeder::class);
 
@@ -45,6 +48,8 @@ class RegisterUserTest extends TestCase
                 'email' => $email,
                 'password' => $password,
             ]);
+
+        Event::assertDispatched(Registered::class);
     }
 
     /**

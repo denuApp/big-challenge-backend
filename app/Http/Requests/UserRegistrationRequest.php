@@ -18,7 +18,7 @@ class UserRegistrationRequest extends FormRequest
             'name' => ['required', 'min:3', 'max:20'],
             'email' => ['required', 'max:30', 'email:strict'],
             'password' => ['required', 'min:6'],
-            'roles' => ['required', Rule::in(['doctor', 'patient'])],
+            'roles' => ['required', Rule::in(['doctor', 'patient'], 'exists:roles,name')],
         ];
     }
 }
