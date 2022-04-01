@@ -12,6 +12,8 @@ class VerifyEmailHandlerController extends Controller
     {
         $request->fulfill();
 
-        return back()->with('message', 'Verified Correctly!');
+        return response()->json([
+            'message' => 'Verified Correctly!',
+        ]);
     }
 }

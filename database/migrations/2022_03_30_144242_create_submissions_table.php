@@ -12,7 +12,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('submission', function (Blueprint $table) {
+        Schema::create('submissions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('patient_id')->references('id')->on('users');
             $table->foreignId('doctor_id')->nullable()->references('id')->on('users');
