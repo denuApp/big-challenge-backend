@@ -3,9 +3,9 @@
 use App\Http\Controllers\Email\ResendingEmailController;
 use App\Http\Controllers\Email\VerifyEmailController;
 use App\Http\Controllers\Email\VerifyEmailHandlerController;
-use App\Http\Controllers\LoginUserController;
-use App\Http\Controllers\LogoutUserController;
-use App\Http\Controllers\RegisterUserController;
+use App\Http\Controllers\Users\LoginUserController;
+use App\Http\Controllers\Users\LogoutUserController;
+use App\Http\Controllers\Users\RegisterUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
