@@ -28,4 +28,4 @@ Route::middleware('auth:sanctum')->post('logout-user', LogoutUserController::cla
 Route::get('verify-email/{id}/{hash}', VerifyEmailHandlerController::class)->name('verification.verify');
 Route::post('email-verification-notification', ResendingEmailController::class)->name('verification.send');
 
-Route::post('store-submissions', StoreSubmissionsController::class);
+Route::middleware('auth:sanctum')->post('store-submissions', StoreSubmissionsController::class);
