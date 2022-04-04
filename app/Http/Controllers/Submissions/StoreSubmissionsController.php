@@ -13,8 +13,9 @@ class StoreSubmissionsController extends Controller
 {
     public function __invoke(SubmissionStoreRequest $request): SubmissionResource
     {
-        $user = User::all()->find($request->patient_id);
-        if ($user->hasRole('patient')) {
+        $users = User::all();
+        $user = $users->find($request->patient_id);
+        if (isset($user) && $user->hasRole('patient')) {
             $submission = Submission::create($request->validated());
 
             return new SubmissionResource($submission);

@@ -48,8 +48,6 @@ class StoreSubmissionsTest extends TestCase
 
     public function test_inavlid_submissions_made_by_doctor()
     {
-        $this->withoutExceptionHandling();
-
         $this->seed(UserPermissionsSeeder::class);
 
         $patient = User::factory()->create();
@@ -67,5 +65,43 @@ class StoreSubmissionsTest extends TestCase
                 ]
             )
             ->assertUnprocessable();
+    }
+
+    /**
+     * @dataProvider invalidSubmissionProvider
+     */
+    public function test_invalid_submissions($submission)
+    {
+        $this->seed(UserPermissionsSeeder::class);
+
+        $patient = User::factory()->create(
+            ['id' => 1]
+        );
+        $patient->assignRole('doctor');
+
+        Sanctum::actingAs($patient);
+
+        $this
+            ->postJson(
+                'api/store-submissions',
+                [
+                    $submission,
+                ]
+            )
+            ->assertUnprocessable();
+    }
+
+    public function invalidSubmissionProvider(): array
+    {
+        return [
+            ['incorrect patient id' => [
+                'patient_id' => 2,
+                'symptoms' => 'my arm hurt really bad',
+            ]],
+            ['empty symptoms' => [
+                'patient_id' => 1,
+            ]],
+
+        ];
     }
 }
