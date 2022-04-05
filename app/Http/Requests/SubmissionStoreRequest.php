@@ -8,7 +8,7 @@ class SubmissionStoreRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->hasRole('patient');
     }
 
     public function rules():array

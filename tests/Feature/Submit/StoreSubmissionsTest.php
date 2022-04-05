@@ -64,7 +64,7 @@ class StoreSubmissionsTest extends TestCase
                     'symptoms' => $symptoms,
                 ]
             )
-            ->assertUnprocessable();
+            ->assertForbidden();
     }
 
     /**
@@ -77,7 +77,7 @@ class StoreSubmissionsTest extends TestCase
         $patient = User::factory()->create(
             ['id' => 1]
         );
-        $patient->assignRole('doctor');
+        $patient->assignRole('patient');
 
         Sanctum::actingAs($patient);
 
