@@ -14,9 +14,10 @@ class RegisterUserController extends Controller
 {
     public function __invoke(UserRegistrationRequest $request): UserResource
     {
-        $request['password'] = Hash::make($request['password']);
+        $array = $request->validated();
+        $array['password'] = Hash::make($request['password']);
 
-        $user = User::create($request->validated());
+        $user = User::create($array);
 
         $user->assignRole($request['roles']);
 

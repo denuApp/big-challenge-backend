@@ -46,7 +46,6 @@ class RegisterUserTest extends TestCase
             ->assertDatabaseHas('users', [
                 'name' => $name,
                 'email' => $email,
-                'password' => $password,
             ]);
 
         Event::assertDispatched(Registered::class);

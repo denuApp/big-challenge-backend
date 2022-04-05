@@ -11,6 +11,8 @@ class ResendingEmailController extends Controller
     {
         $request->user()->sendEmailVerificationNotification();
 
-        return back()->with('message', 'Verification link sent!');
+        return response()->json([
+            'message' => 'Verification link sent!',
+        ]);
     }
 }
