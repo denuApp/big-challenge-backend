@@ -9,6 +9,8 @@ class Information extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function patient()
     {
         $this->belongsTo(User::class);
