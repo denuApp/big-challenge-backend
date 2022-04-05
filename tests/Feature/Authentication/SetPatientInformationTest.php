@@ -25,7 +25,7 @@ class SetPatientInformationTest extends TestCase
 
         $id = 12345678;
         $gender = 'female';
-        $birth = time();
+        $birth = '2000-03-02 15:51:00';
         $height = 84;
         $weight = 105;
 
@@ -55,7 +55,7 @@ class SetPatientInformationTest extends TestCase
 
         $id = 12345678;
         $gender = 'female';
-        $birth = time();
+        $birth = '2000-03-02 15:51:00';
         $height = 84;
         $weight = 105;
 
@@ -97,18 +97,11 @@ class SetPatientInformationTest extends TestCase
     public function invalidPatientInformationProvider(): array
     {
         return [
-            ['wrong patient id' => [
-                'patient_id' => 2,
-                'id_number' => 12345678,
-                'gender' => 'female',
-                'birth_date' =>time(),
-                'height' => 84,
-                'weight' => 105,
-            ]],
+
             ['empty id number' => [
                 'patient_id' => 1,
                 'gender' => 'female',
-                'birth_date' =>time(),
+                'birth_date' => '2000-03-02 15:51:00',
                 'height' => 84,
                 'weight' => 105,
             ]],
@@ -116,7 +109,7 @@ class SetPatientInformationTest extends TestCase
                 'patient_id' => 1,
                 'id_number' => 12345678,
                 'gender' => 'dog',
-                'birth_date' =>time(),
+                'birth_date' => '2000-03-02 15:51:00',
                 'height' => 84,
                 'weight' => 105,
             ]],
@@ -131,14 +124,14 @@ class SetPatientInformationTest extends TestCase
                 'patient_id' => 1,
                 'id_number' => 12345678,
                 'gender' => 'female',
-                'birth_date' =>time(),
+                'birth_date' => '2000-03-02 15:51:00',
                 'weight' => 105,
             ]],
             ['empty weight' => [
                 'patient_id' => 1,
                 'id_number' => 12345678,
                 'gender' => 'female',
-                'birth_date' =>time(),
+                'birth_date' => '2000-03-02 15:51:00',
                 'height' => 84,
             ]],
         ];
