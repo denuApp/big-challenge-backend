@@ -6,6 +6,7 @@ use App\Http\Controllers\Email\VerifyEmailHandlerController;
 use App\Http\Controllers\Submissions\StoreSubmissionsController;
 use App\Http\Controllers\Users\LoginUserController;
 use App\Http\Controllers\Users\LogoutUserController;
+use App\Http\Controllers\Users\PatientInformationController;
 use App\Http\Controllers\Users\RegisterUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('register-user', RegisterUserController::class);
 Route::post('login-user', LoginUserController::class);
 Route::middleware('auth:sanctum')->post('logout-user', LogoutUserController::class);
+Route::middleware('auth:sanctum')->post('store-information', PatientInformationController::class);
 
 //Route::get('verify-email', VerifyEmailController::class)->middleware('auth')->name('verification.notice');
 Route::get('verify-email/{id}/{hash}', VerifyEmailHandlerController::class)->name('verification.verify');
