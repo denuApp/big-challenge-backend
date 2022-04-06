@@ -26,12 +26,6 @@ class SetPatientInformationTest extends TestCase
 
         Sanctum::actingAs($patient);
 
-        $id = 12345678;
-        $gender = 'female';
-        $birth = '2000-03-02 15:51:00';
-        $height = 84;
-        $weight = 105;
-
         $this
             ->postJson(
                 'api/store-information',
@@ -59,18 +53,16 @@ class SetPatientInformationTest extends TestCase
 
         Sanctum::actingAs($patient);
 
-        $id = 12345678;
-        $gender = 'female';
-        $birth = '2000-03-02 15:51:00';
-        $height = 84;
-        $weight = 105;
-
         $this
             ->postJson(
                 'api/store-information',
                 [
                     'patient_id' => $patient->id,
-                    $info,
+                    'id_number' => $info['id_number'],
+                    'gender' => $info['gender'],
+                    'birth_date' => $info['birth_date'],
+                    'height' => $info['height'],
+                    'weight' => $info['weight'],
                 ]
             )
             ->assertForbidden();
