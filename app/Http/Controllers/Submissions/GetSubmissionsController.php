@@ -13,8 +13,6 @@ class GetSubmissionsController extends Controller
     {
         $submissions = Submission::latest()->where('patient_id', Auth::user()->id)->get();
 
-        dd($submissions);
-
         return response()->json([
             'submissions' => $submissions,
         ]);

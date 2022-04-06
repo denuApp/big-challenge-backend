@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->foreignId('doctor_id')->nullable()->references('id')->on('users');
             $table->text('symptoms');
             $table->string('prescription')->nullable();
-            $table->enum('status', ['Pending', 'In Progress', 'Ready'])->default('Pending');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

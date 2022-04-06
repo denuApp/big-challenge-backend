@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SubmissionStoreRequest extends FormRequest
 {
@@ -16,6 +17,7 @@ class SubmissionStoreRequest extends FormRequest
         return [
             'patient_id' => ['required'],
             'symptoms' => ['required', 'max:655535'],
+            'status' => [Rule::in(['pending', 'in_progress', 'ready'])],
         ];
     }
 }
