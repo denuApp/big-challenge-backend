@@ -3,6 +3,7 @@
 use App\Http\Controllers\Email\ResendingEmailController;
 use App\Http\Controllers\Email\VerifyEmailController;
 use App\Http\Controllers\Email\VerifyEmailHandlerController;
+use App\Http\Controllers\Submissions\DeleteSubmissionsController;
 use App\Http\Controllers\Submissions\GetSubmissionsController;
 use App\Http\Controllers\Submissions\StoreSubmissionsController;
 use App\Http\Controllers\Users\LoginUserController;
@@ -33,3 +34,4 @@ Route::post('email-verification-notification', ResendingEmailController::class)-
 
 Route::middleware('auth:sanctum')->post('store-submissions', StoreSubmissionsController::class);
 Route::middleware('auth:sanctum')->get('get-submissions', GetSubmissionsController::class);
+Route::middleware('auth:sanctum')->delete('delete-submissions', DeleteSubmissionsController::class);
