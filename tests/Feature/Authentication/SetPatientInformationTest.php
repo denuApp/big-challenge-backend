@@ -12,7 +12,10 @@ class SetPatientInformationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_setting_information_of_patient()
+    /**
+     * @dataProvider correctPatientInformationProvider
+     */
+    public function test_setting_information_of_patient($info)
     {
         $this->withoutExceptionHandling();
 
@@ -34,17 +37,20 @@ class SetPatientInformationTest extends TestCase
                 'api/store-information',
                 [
                     'patient_id' => $patient->id,
-                    'id_number' => $id,
-                    'gender' => $gender,
-                    'birth_date' =>$birth,
-                    'height' => $height,
-                    'weight' => $weight,
+                    'id_number' => $info['id_number'],
+                    'gender' => $info['gender'],
+                    'birth_date' => $info['birth_date'],
+                    'height' => $info['height'],
+                    'weight' => $info['weight'],
                 ]
             )
             ->assertSuccessful();
     }
 
-    public function test_setting_information_of_patient_by_doctor()
+    /**
+     * @dataProvider correctPatientInformationProvider
+     */
+    public function test_setting_information_of_patient_by_doctor($info)
     {
         $this->seed(UserPermissionsSeeder::class);
 
@@ -64,11 +70,7 @@ class SetPatientInformationTest extends TestCase
                 'api/store-information',
                 [
                     'patient_id' => $patient->id,
-                    'id_number' => $id,
-                    'gender' => $gender,
-                    'birth_date' =>$birth,
-                    'height' => $height,
-                    'weight' => $weight,
+                    $info,
                 ]
             )
             ->assertForbidden();
@@ -92,6 +94,19 @@ class SetPatientInformationTest extends TestCase
                 $information
             )
             ->assertUnprocessable();
+    }
+
+    public function correctPatientInformationProvider(): array
+    {
+        return [
+            ['buen array' => ['id_number' => 12345678,
+            'gender' => 'female',
+            'birth_date' => '2000-03-02 15:51:00',
+            'height' => 84,
+            'weight' => 105, ],
+        ],
+
+        ];
     }
 
     public function invalidPatientInformationProvider(): array

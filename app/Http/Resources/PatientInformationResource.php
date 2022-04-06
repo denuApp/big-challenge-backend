@@ -2,11 +2,11 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Information;
+use App\Models\PatientInformation;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin Information
+ * @mixin PatientInformation
  */
 class PatientInformationResource extends JsonResource
 {

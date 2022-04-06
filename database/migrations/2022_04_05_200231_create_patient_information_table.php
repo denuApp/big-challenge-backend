@@ -12,7 +12,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('information', function (Blueprint $table) {
+        Schema::create('patient_information', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId('patient_id')->references('id')->on('users');
