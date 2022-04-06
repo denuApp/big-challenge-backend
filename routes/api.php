@@ -3,6 +3,7 @@
 use App\Http\Controllers\Email\ResendingEmailController;
 use App\Http\Controllers\Email\VerifyEmailController;
 use App\Http\Controllers\Email\VerifyEmailHandlerController;
+use App\Http\Controllers\Submissions\GetSubmissionsController;
 use App\Http\Controllers\Submissions\StoreSubmissionsController;
 use App\Http\Controllers\Users\LoginUserController;
 use App\Http\Controllers\Users\LogoutUserController;
@@ -31,3 +32,4 @@ Route::get('verify-email/{id}/{hash}', VerifyEmailHandlerController::class)->nam
 Route::post('email-verification-notification', ResendingEmailController::class)->name('verification.send');
 
 Route::middleware('auth:sanctum')->post('store-submissions', StoreSubmissionsController::class);
+Route::middleware('auth:sanctum')->get('get-submissions', GetSubmissionsController::class);

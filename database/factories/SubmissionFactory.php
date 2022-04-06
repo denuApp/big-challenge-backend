@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Submission>
  */
-class SubmissionsFactory extends Factory
+class SubmissionFactory extends Factory
 {
     /**
      * Define the model's default state.
