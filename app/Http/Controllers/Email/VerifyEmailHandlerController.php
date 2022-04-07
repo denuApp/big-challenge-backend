@@ -7,7 +7,6 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class VerifyEmailHandlerController extends Controller
 {
-    // @TODO
     public function __invoke(EmailVerificationRequest $request)
     {
         $request->fulfill();
