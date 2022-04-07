@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Submissions;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SubmissionDeleteRequest;
 use App\Models\Submission;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class DeleteSubmissionsController extends Controller
 {
@@ -15,9 +15,9 @@ class DeleteSubmissionsController extends Controller
 //     * @param  \App\Models\Submission  $submission
 //     * @return \Illuminate\Http\Response
 //     */
-    public function __invoke(Request $submission): JsonResponse
+    public function __invoke(SubmissionDeleteRequest $request, Submission $submission): JsonResponse
     {
-        Submission::destroy($submission->id);
+        $submission->delete();
 
         return response()->json([
             'status' => 200,

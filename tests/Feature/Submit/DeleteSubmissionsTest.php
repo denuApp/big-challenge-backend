@@ -28,7 +28,7 @@ class DeleteSubmissionsTest extends TestCase
         $submission2 = Submission::factory()->create(['patient_id' => $patient->id]);
 
         $this
-            ->deleteJson('api/delete-submissions/', ['id' => $submission1->id])
+            ->deleteJson('api/delete-submission/'.$submission1->id)
             ->assertSuccessful();
 
         $this
@@ -40,5 +40,24 @@ class DeleteSubmissionsTest extends TestCase
                 'id' => $submission2->id,
                 'symptoms' => $submission2->symptoms,
             ]);
+    }
+
+    public function test_delete_submission_by_another_patient()
+    {
+        $this->seed(UserPermissionsSeeder::class);
+
+        $patient1 = User::factory()->create();
+        $patient1->assignRole('patient');
+
+        $patient2 = User::factory()->create();
+        $patient2->assignRole('patient');
+
+        Sanctum::actingAs($patient2);
+
+        $submission = Submission::factory()->create(['patient_id' => $patient1->id]);
+
+        $this
+            ->deleteJson('api/delete-submission/'.$submission->id)
+            ->assertForbidden();
     }
 }

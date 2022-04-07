@@ -34,4 +34,4 @@ Route::post('email-verification-notification', ResendingEmailController::class)-
 
 Route::middleware('auth:sanctum')->post('store-submissions', StoreSubmissionsController::class);
 Route::middleware('auth:sanctum')->get('get-submissions', GetSubmissionsController::class);
-Route::middleware('auth:sanctum')->delete('delete-submissions', DeleteSubmissionsController::class);
+Route::middleware(['auth:sanctum'])->delete('delete-submission/{submission}', DeleteSubmissionsController::class);
