@@ -12,13 +12,14 @@ class SubmissionDeleteRequest extends FormRequest
     {
         /** @var Submission $submission */
         $submission = $this->route('submission');
-//        return true;
+
         return $this->user()->hasRole('patient') && $submission->patient_id == Auth::user()->id;
     }
 
     public function rules():array
     {
         return [
+            //
         ];
     }
 }
