@@ -10,13 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class GetOneSubmissionsController extends Controller
 {
-    public function __invoke(): JsonResponse
+    public function __invoke(Submission $submission): JsonResponse
     {
-        $submissions = Submission::latest()->where('patient_id', Auth::user()->id)->get();
         $info = PatientInformation::latest()->where('patient_id', Auth::user()->id)->get();
 
         return response()->json([
-            'submissions' => $submissions,
+            'submissions' => $submission,
             'info' => $info,
         ]);
     }

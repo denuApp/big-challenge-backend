@@ -30,11 +30,39 @@ class GetOneSubmissionTest extends TestCase
         $submission = Submission::factory()->create(['patient_id' => $patient->id]);
 
         $this
-            ->getJson('api/get-one-submissions')
+            ->getJson('api/get-one-submission/'.$submission->id)
             ->assertSuccessful()
             ->assertJsonFragment([
                 'symptoms' => $submission->symptoms,
                 'id_number' => $info->id_number,
+            ]);
+    }
+
+    public function test_get_only_selected_submissions_of_a_patient()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->seed(UserPermissionsSeeder::class);
+
+        $patient = User::factory()->create();
+        $patient->assignRole('patient');
+
+        Sanctum::actingAs($patient);
+
+        $info = PatientInformation::factory()->create(['patient_id' => $patient->id]);
+
+        $submission1 = Submission::factory()->create(['patient_id' => $patient->id]);
+        $submission2 = Submission::factory()->create(['patient_id' => $patient->id]);
+
+        $this
+            ->getJson('api/get-one-submission/'.$submission1->id)
+            ->assertSuccessful()
+            ->assertJsonFragment([
+                'symptoms' => $submission1->symptoms,
+                'id_number' => $info->id_number,
+            ])
+            ->assertJsonMissing([
+                'symptoms' => $submission2->symptoms,
             ]);
     }
 
@@ -59,7 +87,7 @@ class GetOneSubmissionTest extends TestCase
         $submission2 = Submission::factory()->create(['patient_id' => $patient2->id]);
 
         $this
-            ->getJson('api/get-one-submissions')
+            ->getJson('api/get-one-submission/'.$submission1->id)
             ->assertSuccessful()
             ->assertJsonFragment([
                 'symptoms' => $submission1->symptoms,
