@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PatientInformation>
  */
-class InformationFactory extends Factory
+class PatientInformationFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,10 +20,10 @@ class InformationFactory extends Factory
         return [
             'patient_id' => User::factory()->create(),
             'id_number' => $this->faker->unique()->randomNumber(8),
-            'gender' => $this->faker->shuffleString(['female', 'male', 'other']),
+            'gender' => $this->faker->randomElement(['female', 'male', 'other']),
             'birth_date' =>$this->faker->dateTimeThisCentury,
-            'height' => $this->faker->biasedNumberBetween([20], [200]),
-            'weight' => $this->faker->biasedNumberBetween([1], [300]),
+            'height' => $this->faker->biasedNumberBetween(20, 200),
+            'weight' => $this->faker->biasedNumberBetween(1, 300),
         ];
     }
 }
