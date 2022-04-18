@@ -32,10 +32,9 @@ class GetOneSubmissionTest extends TestCase
         $this
             ->getJson('api/get-one-submissions')
             ->assertSuccessful()
-            ->assertSee([
-                $submission->symptoms,
-                $info->gender,
-                $info->height,
+            ->assertJsonFragment([
+                'symptoms' => $submission->symptoms,
+                'id_number' => $info->id_number,
             ]);
     }
 
@@ -62,13 +61,13 @@ class GetOneSubmissionTest extends TestCase
         $this
             ->getJson('api/get-one-submissions')
             ->assertSuccessful()
-            ->assertSee([
-                $submission1->symptoms,
-                $info1->id_number,
+            ->assertJsonFragment([
+                'symptoms' => $submission1->symptoms,
+                'id_number' => $info1->id_number,
             ])
-            ->assertDontSee([
-                $submission2->symptoms,
-                $info2->id_number,
+            ->assertJsonMissing([
+                'symptoms' => $submission2->symptoms,
+                'id_number' => $info2->id_number,
             ]);
     }
 }
