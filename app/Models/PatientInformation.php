@@ -11,8 +11,6 @@ class PatientInformation extends Model
 
     protected $guarded = [];
 
-    protected $table = 'patient_information';
-
     public function patient()
     {
         return $this->belongsTo(User::class, 'patient_id');

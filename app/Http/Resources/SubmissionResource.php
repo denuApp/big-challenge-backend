@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Submission;
+use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -18,9 +19,11 @@ class SubmissionResource extends JsonResource
      */
     public function toArray($request)
     {
+        $patient = User::where('id', $this->patient_id)->first();
+
         return[
             'id' => $this->id,
-            'patient' => ($this->patient_id) ? new UserResource($this->patient->load('patientInformation')) : null,
+            'patient' => ($this->patient_id) ? new UserResource($patient->load('patientInformation')) : null,
             'doctor_id' => $this->doctor_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
