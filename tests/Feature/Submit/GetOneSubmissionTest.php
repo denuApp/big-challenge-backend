@@ -35,6 +35,7 @@ class GetOneSubmissionTest extends TestCase
             ->assertJsonFragment([
                 'symptoms' => $submission->symptoms,
                 'id_number' => $info->id_number,
+                'name' => $patient->name,
             ]);
     }
 
@@ -60,6 +61,8 @@ class GetOneSubmissionTest extends TestCase
             ->assertJsonFragment([
                 'symptoms' => $submission1->symptoms,
                 'id_number' => $info->id_number,
+                'name' => $patient->name,
+
             ])
             ->assertJsonMissing([
                 'symptoms' => $submission2->symptoms,
@@ -92,10 +95,12 @@ class GetOneSubmissionTest extends TestCase
             ->assertJsonFragment([
                 'symptoms' => $submission1->symptoms,
                 'id_number' => $info1->id_number,
+                'name' => $patient1->name,
             ])
             ->assertJsonMissing([
                 'symptoms' => $submission2->symptoms,
                 'id_number' => $info2->id_number,
+                'name' => $patient2->name,
             ]);
     }
 }
