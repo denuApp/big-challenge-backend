@@ -20,7 +20,7 @@ class SubmissionResource extends JsonResource
     {
         return[
             'id' => $this->id,
-            'patient_id' => $this->patient_id,
+            'patient' => ($this->patient_id) ? new UserResource($this->patient->load('patientInformation')) : null,
             'doctor_id' => $this->doctor_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

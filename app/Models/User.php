@@ -45,11 +45,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function submission()
     {
-        $this->hasMany(Submission::class);
+        return $this->hasMany(Submission::class);
     }
 
-    public function information()
+    public function patientInformation()
     {
-        $this->hasMany(PatientInformation::class);
+        return $this->hasOne(PatientInformation::class);
     }
 }
