@@ -20,7 +20,6 @@ class PatientInformationEditRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'patient_id' => ['required'],
             'id_number' => ['required'],
             'gender' => ['required', Rule::in(['female', 'male', 'other'])],
             'birth_date' => ['required', 'date'],

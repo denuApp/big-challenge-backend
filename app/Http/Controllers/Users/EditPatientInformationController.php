@@ -13,8 +13,6 @@ class EditPatientInformationController extends Controller
     {
         $patientInfo->update($request->validated());
 
-        logger($patientInfo);
-
         return new PatientInformationResource($patientInfo);
     }
 }

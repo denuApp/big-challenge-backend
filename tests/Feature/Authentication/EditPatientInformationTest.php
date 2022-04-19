@@ -30,7 +30,6 @@ class EditPatientInformationTest extends TestCase
             ->patchJson(
                 'api/edit-information/'.$info->id,
                 [
-                    'patient_id' => $patient->id,
                     'id_number' => $info['id_number'],
                     'gender' => $info['gender'],
                     'birth_date' => $info['birth_date'],
@@ -71,7 +70,6 @@ class EditPatientInformationTest extends TestCase
             ->patchJson(
                 'api/edit-information/'.$info->id,
                 [
-                    'patient_id' => $patient->id,
                     'id_number' => $info['id_number'],
                     'gender' => $info['gender'],
                     'birth_date' => $info['birth_date'],
@@ -110,14 +108,12 @@ class EditPatientInformationTest extends TestCase
         return [
 
             ['empty id number' => [
-                'patient_id' => 1,
                 'gender' => 'female',
                 'birth_date' => '2000-03-02 15:51:00',
                 'height' => 84,
                 'weight' => 105,
             ]],
             ['invalid gender' => [
-                'patient_id' => 1,
                 'id_number' => 12345678,
                 'gender' => 'dog',
                 'birth_date' => '2000-03-02 15:51:00',
@@ -125,21 +121,18 @@ class EditPatientInformationTest extends TestCase
                 'weight' => 105,
             ]],
             ['empty birth date' => [
-                'patient_id' => 1,
                 'id_number' => 12345678,
                 'gender' => 'female',
                 'height' => 84,
                 'weight' => 105,
             ]],
             ['empty height' => [
-                'patient_id' => 1,
                 'id_number' => 12345678,
                 'gender' => 'female',
                 'birth_date' => '2000-03-02 15:51:00',
                 'weight' => 105,
             ]],
             ['empty weight' => [
-                'patient_id' => 1,
                 'id_number' => 12345678,
                 'gender' => 'female',
                 'birth_date' => '2000-03-02 15:51:00',
