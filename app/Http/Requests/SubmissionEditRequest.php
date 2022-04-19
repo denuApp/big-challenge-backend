@@ -19,7 +19,6 @@ class SubmissionEditRequest extends FormRequest
     public function rules():array
     {
         return [
-            'patient_id' => ['required'],
             'symptoms' => ['required', 'max:655535'],
         ];
     }

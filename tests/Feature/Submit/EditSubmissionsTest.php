@@ -31,7 +31,6 @@ class EditSubmissionsTest extends TestCase
             ->patchJson(
                 'api/edit-submission/'.$submission->id,
                 [
-                    'patient_id' => $patient->id,
                     'symptoms' => $symptoms,
                 ]
             )
@@ -66,23 +65,43 @@ class EditSubmissionsTest extends TestCase
             ->patchJson(
                 'api/edit-submission/'.$submission->id,
                 [
-                    'patient_id' => $patient->id,
                     'symptoms' => $symptoms,
                 ]
             )
             ->assertForbidden();
     }
 
-    /**
-     * @dataProvider invalidSubmissionProvider
-     */
-    public function test_invalid_submissions($edited)
+    public function test_editing_submission_from_another_patient()
     {
         $this->seed(UserPermissionsSeeder::class);
 
-        $patient = User::factory()->create(
-            ['id' => 1]
-        );
+        $patient1 = User::factory()->create();
+        $patient1->assignRole('patient');
+
+        $patient2 = User::factory()->create();
+        $patient2->assignRole('patient');
+
+        Sanctum::actingAs($patient2);
+
+        $submission = Submission::factory()->create(['patient_id' => $patient1->id]);
+
+        $symptoms = 'i have fever and cough';
+
+        $this
+            ->patchJson(
+                'api/edit-submission/'.$submission->id,
+                [
+                    'symptoms' => $symptoms,
+                ]
+            )
+            ->assertForbidden();
+    }
+
+    public function test_editing_with_empty_symptoms()
+    {
+        $this->seed(UserPermissionsSeeder::class);
+
+        $patient = User::factory()->create();
         $patient->assignRole('patient');
 
         Sanctum::actingAs($patient);
@@ -93,22 +112,8 @@ class EditSubmissionsTest extends TestCase
             ->patchJson(
                 'api/edit-submission/'.$submission->id,
                 [
-                    $edited,
                 ]
             )
             ->assertUnprocessable();
-    }
-
-    public function invalidSubmissionProvider(): array
-    {
-        return [
-            ['incorrect patient id' => [
-                'patient_id' => 2,
-                'symptoms' => 'my arm hurt really bad',
-            ]],
-            ['empty symptoms' => [
-                'patient_id' => 1,
-            ]],
-        ];
     }
 }
