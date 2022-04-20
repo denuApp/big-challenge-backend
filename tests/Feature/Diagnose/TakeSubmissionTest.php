@@ -41,4 +41,29 @@ class TakeSubmissionTest extends TestCase
                 'status' => 'in_progress',
             ]);
     }
+
+    public function test_doctor_cant_take_submission_already_taken()
+    {
+        $this->seed(UserPermissionsSeeder::class);
+
+        $patient = User::factory()->create();
+        $patient->assignRole('patient');
+
+        $doctor = User::factory()->create();
+        $doctor->assignRole('doctor');
+
+        $submission = Submission::factory()->create([
+            'patient_id' => $patient->id,
+            'doctor_id' => $doctor->id,
+            'status' => 'in_progress',
+        ]);
+
+        Sanctum::actingAs($doctor);
+
+        $this
+            ->patch('api/take-submission/'.$submission->id, [
+                'doctor_id' => $doctor->id,
+            ])
+            ->assertForbidden();
+    }
 }

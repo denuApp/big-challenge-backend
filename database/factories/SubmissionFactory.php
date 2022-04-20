@@ -19,7 +19,7 @@ class SubmissionFactory extends Factory
     {
         return [
             'patient_id' => User::factory()->create(),
-            'doctor_id' => User::factory()->create(),
+            'doctor_id' => null,
             'symptoms' => $this->faker->text,
             'prescription' => $this->faker->text,
         ];
