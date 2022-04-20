@@ -7,6 +7,7 @@ use App\Http\Controllers\Submissions\DeleteSubmissionsController;
 use App\Http\Controllers\Submissions\EditSubmissionsController;
 use App\Http\Controllers\Submissions\GetSubmissionsController;
 use App\Http\Controllers\Submissions\StoreSubmissionsController;
+use App\Http\Controllers\Submissions\TakeSubmissionsController;
 use App\Http\Controllers\Users\EditPatientInformationController;
 use App\Http\Controllers\Users\LoginUserController;
 use App\Http\Controllers\Users\LogoutUserController;
@@ -39,3 +40,4 @@ Route::middleware('auth:sanctum')->post('store-submissions', StoreSubmissionsCon
 Route::middleware('auth:sanctum')->get('get-submissions', GetSubmissionsController::class);
 Route::middleware(['auth:sanctum'])->delete('delete-submission/{submission}', DeleteSubmissionsController::class);
 Route::middleware(['auth:sanctum'])->patch('edit-submission/{submission}', EditSubmissionsController::class);
+Route::middleware(['auth:sanctum'])->patch('take-submission/{submission}', TakeSubmissionsController::class);
