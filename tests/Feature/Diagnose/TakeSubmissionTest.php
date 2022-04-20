@@ -19,10 +19,7 @@ class TakeSubmissionTest extends TestCase
 
         $this->seed(UserPermissionsSeeder::class);
 
-        $patient = User::factory()->create();
-        $patient->assignRole('patient');
-
-        $submission = Submission::factory()->create(['patient_id' => $patient->id]);
+        $submission = Submission::factory()->create();
 
         $doctor = User::factory()->create();
         $doctor->assignRole('doctor');
@@ -46,14 +43,10 @@ class TakeSubmissionTest extends TestCase
     {
         $this->seed(UserPermissionsSeeder::class);
 
-        $patient = User::factory()->create();
-        $patient->assignRole('patient');
-
         $doctor = User::factory()->create();
         $doctor->assignRole('doctor');
 
         $submission = Submission::factory()->create([
-            'patient_id' => $patient->id,
             'doctor_id' => $doctor->id,
             'status' => 'in_progress',
         ]);
@@ -63,6 +56,24 @@ class TakeSubmissionTest extends TestCase
         $this
             ->patch('api/take-submission/'.$submission->id, [
                 'doctor_id' => $doctor->id,
+            ])
+            ->assertForbidden();
+    }
+
+    public function test_patient_cant_take_submission()
+    {
+        $this->seed(UserPermissionsSeeder::class);
+
+        $patient = User::factory()->create();
+        $patient->assignRole('patient');
+
+        $submission = Submission::factory()->create();
+
+        Sanctum::actingAs($patient);
+
+        $this
+            ->patch('api/take-submission/'.$submission->id, [
+                'doctor_id' => $patient->id,
             ])
             ->assertForbidden();
     }
