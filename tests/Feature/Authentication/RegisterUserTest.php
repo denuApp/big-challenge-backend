@@ -12,12 +12,7 @@ class RegisterUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function test_the_controller_register_user_correctly()
+    public function test_the_controller_register_user_correctly(): void
     {
         $this->withoutExceptionHandling();
         Event::fake();
