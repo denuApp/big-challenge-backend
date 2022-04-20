@@ -5,6 +5,7 @@ use App\Http\Controllers\Email\VerifyEmailController;
 use App\Http\Controllers\Email\VerifyEmailHandlerController;
 use App\Http\Controllers\Submissions\DeleteSubmissionsController;
 use App\Http\Controllers\Submissions\EditSubmissionsController;
+use App\Http\Controllers\Submissions\GetOneSubmissionsController;
 use App\Http\Controllers\Submissions\GetSubmissionsController;
 use App\Http\Controllers\Submissions\StoreSubmissionsController;
 use App\Http\Controllers\Submissions\TakeSubmissionsController;
@@ -38,6 +39,7 @@ Route::post('email-verification-notification', ResendingEmailController::class)-
 
 Route::middleware('auth:sanctum')->post('store-submissions', StoreSubmissionsController::class);
 Route::middleware('auth:sanctum')->get('get-submissions', GetSubmissionsController::class);
+Route::middleware('auth:sanctum')->get('get-one-submission/{submission}', GetOneSubmissionsController::class);
 Route::middleware(['auth:sanctum'])->delete('delete-submission/{submission}', DeleteSubmissionsController::class);
 Route::middleware(['auth:sanctum'])->patch('edit-submission/{submission}', EditSubmissionsController::class);
 Route::middleware(['auth:sanctum'])->patch('take-submission/{submission}', TakeSubmissionsController::class);

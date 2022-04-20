@@ -30,9 +30,9 @@ class GetSubmissionsTest extends TestCase
         $this
             ->getJson('api/get-submissions')
             ->assertSuccessful()
-            ->assertSee([
-                $submission1->symptoms,
-                $submission2->symptoms,
+            ->assertJsonFragment([
+                'symptoms' => $submission1->symptoms,
+                'symptoms' => $submission2->symptoms,
             ]);
     }
 
@@ -57,10 +57,10 @@ class GetSubmissionsTest extends TestCase
             ->getJson('api/get-submissions')
             ->assertSuccessful()
             ->assertSee([
-                $submission1->symptoms,
+                'symptoms' => $submission1->symptoms,
             ])
-            ->assertDontSee([
-                $submission2->symptoms,
+            ->assertJsonMissing([
+                'symptoms' => $submission2->symptoms,
             ]);
     }
 }

@@ -13,6 +13,6 @@ class PatientInformation extends Model
 
     public function patient()
     {
-        $this->belongsTo(User::class, 'patient_id');
+        return $this->belongsTo(User::class, 'patient_id');
     }
 }
