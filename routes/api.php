@@ -5,8 +5,10 @@ use App\Http\Controllers\Email\VerifyEmailController;
 use App\Http\Controllers\Email\VerifyEmailHandlerController;
 use App\Http\Controllers\Submissions\DeleteSubmissionsController;
 use App\Http\Controllers\Submissions\GetOneSubmissionsController;
+use App\Http\Controllers\Submissions\EditSubmissionsController;
 use App\Http\Controllers\Submissions\GetSubmissionsController;
 use App\Http\Controllers\Submissions\StoreSubmissionsController;
+use App\Http\Controllers\Users\EditPatientInformationController;
 use App\Http\Controllers\Users\LoginUserController;
 use App\Http\Controllers\Users\LogoutUserController;
 use App\Http\Controllers\Users\PatientInformationController;
@@ -28,6 +30,7 @@ Route::post('register-user', RegisterUserController::class);
 Route::post('login-user', LoginUserController::class);
 Route::middleware('auth:sanctum')->post('logout-user', LogoutUserController::class);
 Route::middleware('auth:sanctum')->post('store-information', PatientInformationController::class);
+Route::middleware('auth:sanctum')->patch('edit-information/{patientInfo}', EditPatientInformationController::class);
 
 //Route::get('verify-email', VerifyEmailController::class)->middleware('auth')->name('verification.notice');
 Route::get('verify-email/{id}/{hash}', VerifyEmailHandlerController::class)->name('verification.verify');
@@ -37,3 +40,4 @@ Route::middleware('auth:sanctum')->post('store-submissions', StoreSubmissionsCon
 Route::middleware('auth:sanctum')->get('get-submissions', GetSubmissionsController::class);
 Route::middleware('auth:sanctum')->get('get-one-submission/{submission}', GetOneSubmissionsController::class);
 Route::middleware(['auth:sanctum'])->delete('delete-submission/{submission}', DeleteSubmissionsController::class);
+Route::middleware(['auth:sanctum'])->patch('edit-submission/{submission}', EditSubmissionsController::class);
