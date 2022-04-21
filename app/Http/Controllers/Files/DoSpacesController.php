@@ -46,7 +46,7 @@ class DoSpacesController extends Controller
 
     public function update(DigitalOceanUpdateRequest $request)
     {
-        $file = $request->asFile('doctorProfileImageFile');
+        $file = $request->File('doctorProfileImageFile');
         $fileName = $request->validated()['doctorProfileImageFileName'];
         $folder = config('filesystems.disks.do.folder');
 
