@@ -88,4 +88,17 @@ class GetSubmissionsTest extends TestCase
                 'symptoms' => $submission2->symptoms,
             ]);
     }
+
+    public function test_get_submissions_by_unexisting_status_of_a_patient()
+    {
+        $this->seed(UserPermissionsSeeder::class);
+
+        $patient = User::factory()->create();
+
+        Sanctum::actingAs($patient);
+
+        $this
+            ->postJson('api/get-submissions', ['status' => 'nothing'])
+            ->assertUnprocessable();
+    }
 }
