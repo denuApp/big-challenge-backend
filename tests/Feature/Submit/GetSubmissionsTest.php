@@ -63,4 +63,43 @@ class GetSubmissionsTest extends TestCase
                 'symptoms' => $submission2->symptoms,
             ]);
     }
+
+    public function test_get_submissions_by_status_of_a_patient()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->seed(UserPermissionsSeeder::class);
+
+        $patient = User::factory()->create();
+        $patient->assignRole('patient');
+
+        Sanctum::actingAs($patient);
+
+        $submission1 = Submission::factory()->create(['patient_id' => $patient->id, 'symptoms'=>'resfrio']);
+        $submission2 = Submission::factory()->create(['patient_id' => $patient->id, 'status' => 'in_progress', 'symptoms'=>'tos']);
+
+        $this
+            ->getJson('api/get-submissions/?status=pending')
+            ->assertSuccessful()
+            ->assertJsonFragment([
+                'symptoms' => $submission1->symptoms,
+            ])
+            ->assertJsonMissing([
+                'symptoms' => $submission2->symptoms,
+            ]);
+    }
+
+    public function test_get_submissions_by_unexisting_status_of_a_patient()
+    {
+        $this->seed(UserPermissionsSeeder::class);
+
+        $patient = User::factory()->create();
+        $patient->assignRole('patient');
+
+        Sanctum::actingAs($patient);
+
+        $this
+            ->getJson('api/get-submissions/?status=nothing')
+            ->assertUnprocessable();
+    }
 }
