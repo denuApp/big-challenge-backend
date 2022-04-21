@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\CdnService;
+use App\Services\DOCdnServices;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,6 +15,6 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->app->bind(CdnService::class, DOCdnService::class);
+        $this->app->bind(CdnService::class, DOCdnServices::class);
     }
 }

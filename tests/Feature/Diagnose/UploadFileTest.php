@@ -30,8 +30,8 @@ class UploadFileTest extends TestCase
         $file = UploadedFile::fake()->create('prescription.txt');
 
         $this
-            ->postJson(
-                'api/upload-file'.$submission->id,
+            ->patchJson(
+                'api/upload-file/'.$submission->id,
                 ['prescription' => $file]
             )
             ->assertSuccessful();

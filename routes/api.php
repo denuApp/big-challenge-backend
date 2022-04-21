@@ -3,6 +3,7 @@
 use App\Http\Controllers\Email\ResendingEmailController;
 use App\Http\Controllers\Email\VerifyEmailController;
 use App\Http\Controllers\Email\VerifyEmailHandlerController;
+use App\Http\Controllers\Files\DoSpacesController;
 use App\Http\Controllers\Submissions\DeleteSubmissionsController;
 use App\Http\Controllers\Submissions\EditSubmissionsController;
 use App\Http\Controllers\Submissions\GetOneSubmissionsController;
@@ -43,3 +44,5 @@ Route::middleware('auth:sanctum')->get('get-one-submission/{submission}', GetOne
 Route::middleware(['auth:sanctum'])->delete('delete-submission/{submission}', DeleteSubmissionsController::class);
 Route::middleware(['auth:sanctum'])->patch('edit-submission/{submission}', EditSubmissionsController::class);
 Route::middleware(['auth:sanctum'])->patch('take-submission/{submission}', TakeSubmissionsController::class);
+
+Route::middleware(['auth:sanctum'])->patch('upload-file/{submission}', [DoSpacesController::class, 'store']);

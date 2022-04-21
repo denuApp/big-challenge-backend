@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\DigitalOceanDeleteRequest;
 use App\Http\Requests\DigitalOceanStoreRequest;
 use App\Http\Requests\DigitalOceanUpdateRequest;
+use App\Services\CdnService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -20,7 +21,7 @@ class DoSpacesController extends Controller
 
     public function store(DigitalOceanStoreRequest $request)
     {
-        $file = $request->asFile('doctorProfileImageFile');
+        $file = $request->asFile('prescription');
         $fileName = (string) Str::uuid();
         $folder = config('filesystems.disks.do.folder');
 
