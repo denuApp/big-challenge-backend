@@ -94,6 +94,7 @@ class GetSubmissionsTest extends TestCase
         $this->seed(UserPermissionsSeeder::class);
 
         $patient = User::factory()->create();
+        $patient->assignRole('patient');
 
         Sanctum::actingAs($patient);
 
