@@ -28,7 +28,7 @@ class GetSubmissionsTest extends TestCase
         $submission2 = Submission::factory()->create(['patient_id' => $patient->id]);
 
         $this
-            ->postJson('api/get-submissions')
+            ->getJson('api/get-submissions')
             ->assertSuccessful()
             ->assertJsonFragment([
                 'symptoms' => $submission1->symptoms,
@@ -54,7 +54,7 @@ class GetSubmissionsTest extends TestCase
         $submission2 = Submission::factory()->create(['patient_id' => $patient2->id]);
 
         $this
-            ->postJson('api/get-submissions')
+            ->getJson('api/get-submissions')
             ->assertSuccessful()
             ->assertSee([
                 'symptoms' => $submission1->symptoms,
@@ -79,7 +79,7 @@ class GetSubmissionsTest extends TestCase
         $submission2 = Submission::factory()->create(['patient_id' => $patient->id, 'status' => 'in_progress', 'symptoms'=>'tos']);
 
         $this
-            ->postJson('api/get-submissions', ['status' => 'pending'])
+            ->getJson('api/get-submissions/?status=pending')
             ->assertSuccessful()
             ->assertJsonFragment([
                 'symptoms' => $submission1->symptoms,
@@ -99,7 +99,7 @@ class GetSubmissionsTest extends TestCase
         Sanctum::actingAs($patient);
 
         $this
-            ->postJson('api/get-submissions', ['status' => 'nothing'])
+            ->getJson('api/get-submissions/?status=nothing')
             ->assertUnprocessable();
     }
 }

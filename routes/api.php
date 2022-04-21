@@ -38,7 +38,7 @@ Route::get('verify-email/{id}/{hash}', VerifyEmailHandlerController::class)->nam
 Route::post('email-verification-notification', ResendingEmailController::class)->name('verification.send');
 
 Route::middleware('auth:sanctum')->post('store-submissions', StoreSubmissionsController::class);
-Route::middleware('auth:sanctum')->post('get-submissions', GetSubmissionsController::class);
+Route::middleware('auth:sanctum')->get('get-submissions', GetSubmissionsController::class);
 Route::middleware('auth:sanctum')->get('get-one-submission/{submission}', GetOneSubmissionsController::class);
 Route::middleware(['auth:sanctum'])->delete('delete-submission/{submission}', DeleteSubmissionsController::class);
 Route::middleware(['auth:sanctum'])->patch('edit-submission/{submission}', EditSubmissionsController::class);
