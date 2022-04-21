@@ -28,7 +28,7 @@ class GetSubmissionsTest extends TestCase
         $submission2 = Submission::factory()->create(['patient_id' => $patient->id]);
 
         $this
-            ->getJson('api/get-submissions')
+            ->postJson('api/get-submissions')
             ->assertSuccessful()
             ->assertJsonFragment([
                 'symptoms' => $submission1->symptoms,
@@ -54,9 +54,34 @@ class GetSubmissionsTest extends TestCase
         $submission2 = Submission::factory()->create(['patient_id' => $patient2->id]);
 
         $this
-            ->getJson('api/get-submissions')
+            ->postJson('api/get-submissions')
             ->assertSuccessful()
             ->assertSee([
+                'symptoms' => $submission1->symptoms,
+            ])
+            ->assertJsonMissing([
+                'symptoms' => $submission2->symptoms,
+            ]);
+    }
+
+    public function test_get_submissions_by_status_of_a_patient()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->seed(UserPermissionsSeeder::class);
+
+        $patient = User::factory()->create();
+        $patient->assignRole('patient');
+
+        Sanctum::actingAs($patient);
+
+        $submission1 = Submission::factory()->create(['patient_id' => $patient->id, 'symptoms'=>'resfrio']);
+        $submission2 = Submission::factory()->create(['patient_id' => $patient->id, 'status' => 'in_progress', 'symptoms'=>'tos']);
+
+        $this
+            ->postJson('api/get-submissions', ['status' => 'pending'])
+            ->assertSuccessful()
+            ->assertJsonFragment([
                 'symptoms' => $submission1->symptoms,
             ])
             ->assertJsonMissing([
