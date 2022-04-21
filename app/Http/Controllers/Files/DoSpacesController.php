@@ -21,7 +21,7 @@ class DoSpacesController extends Controller
 
     public function store(DigitalOceanStoreRequest $request)
     {
-        $file = $request->asFile('prescription');
+        $file = $request->File('prescription');
         $fileName = (string) Str::uuid();
         $folder = config('filesystems.disks.do.folder');
 

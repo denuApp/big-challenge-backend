@@ -45,4 +45,4 @@ Route::middleware(['auth:sanctum'])->delete('delete-submission/{submission}', De
 Route::middleware(['auth:sanctum'])->patch('edit-submission/{submission}', EditSubmissionsController::class);
 Route::middleware(['auth:sanctum'])->patch('take-submission/{submission}', TakeSubmissionsController::class);
 
-Route::middleware(['auth:sanctum'])->patch('upload-file/{submission}', [DoSpacesController::class, 'store']);
+Route::middleware(['auth:sanctum'])->post('upload-file/{submission}', [DoSpacesController::class, 'store']);

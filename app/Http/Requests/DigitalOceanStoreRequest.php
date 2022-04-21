@@ -19,7 +19,7 @@ class DigitalOceanStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'prescription' => ['requiered', 'mimetypes:text/plain'],
+            'prescription' => ['required', 'file', 'max:2048'],
         ];
     }
 }
