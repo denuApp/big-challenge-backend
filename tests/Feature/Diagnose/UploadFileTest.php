@@ -46,7 +46,7 @@ class UploadFileTest extends TestCase
         $submission->refresh();
 
         Storage::disk('do')->assertExists($submission->prescription);
-    
+
     }
 
     public function test_diagnose_uploading_by_patient()
