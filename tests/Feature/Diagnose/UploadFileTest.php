@@ -24,6 +24,8 @@ class UploadFileTest extends TestCase
         $doctor = User::factory()->create();
         $doctor->assignRole('doctor');
 
+        Storage::fake('do');
+
         Sanctum::actingAs($doctor);
 
         $submission = Submission::factory()->create([
