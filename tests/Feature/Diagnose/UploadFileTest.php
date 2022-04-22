@@ -8,6 +8,7 @@ use Database\Seeders\UserPermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class UploadFileTest extends TestCase
@@ -23,6 +24,8 @@ class UploadFileTest extends TestCase
         $doctor = User::factory()->create();
         $doctor->assignRole('doctor');
 
+        Sanctum::actingAs($doctor);
+
         $submission = Submission::factory()->create([
             'doctor_id' => $doctor->id,
             'status' => 'in_progress', ]);
@@ -30,13 +33,15 @@ class UploadFileTest extends TestCase
         $file = UploadedFile::fake()->create('prescription.txt');
 
         $this
-            ->patchJson(
+            ->postJson(
                 'api/upload-file/'.$submission->id,
                 ['prescription' => $file]
             )
             ->assertSuccessful();
 
+        $submission->refresh();
+
         // Assert the file was stored...
-        Storage::disk('do')->assertExists('prescription.txt');
+        Storage::disk('do')->assertExists($submission->prescription);
     }
 }

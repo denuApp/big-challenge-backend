@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\DigitalOceanDeleteRequest;
 use App\Http\Requests\DigitalOceanStoreRequest;
 use App\Http\Requests\DigitalOceanUpdateRequest;
+use App\Models\Submission;
 use App\Services\CdnService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -19,7 +20,7 @@ class DoSpacesController extends Controller
         $this->cdnService = $cdnService;
     }
 
-    public function store(DigitalOceanStoreRequest $request)
+    public function store(DigitalOceanStoreRequest $request, Submission $submission)
     {
         $file = $request->File('prescription');
         $fileName = (string) Str::uuid();
@@ -29,6 +30,8 @@ class DoSpacesController extends Controller
             "{$folder}/{$fileName}",
             file_get_contents($file)
         );
+
+        $submission->update(['prescription' => "{$folder}/{$fileName}"]);
 
         return response()->json(['message' => 'File uploaded'], 200);
     }
