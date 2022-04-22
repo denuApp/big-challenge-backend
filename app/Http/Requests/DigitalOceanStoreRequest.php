@@ -12,8 +12,8 @@ class DigitalOceanStoreRequest extends FormRequest
         /** @var Submission $submission */
         $submission = $this->route('submission');
 
-//        return $this->user()->hasRole('doctor') && ($submission->doctor_id == $this->user()->id);
-        return $this->user()->hasRole('doctor');
+        return $this->user()->hasRole('doctor') && ($submission->doctor_id == $this->user()->id);
+//        return $this->user()->hasRole('doctor');
     }
 
     public function rules(): array
