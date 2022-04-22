@@ -51,7 +51,6 @@ class UploadFileTest extends TestCase
     public function test_diagnose_uploading_by_patient()
     {
         $this->seed(UserPermissionsSeeder::class);
-
         $patient = User::factory()->create();
         $patient->assignRole('patient');
 
