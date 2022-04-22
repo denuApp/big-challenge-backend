@@ -33,7 +33,7 @@ class DoSpacesController extends Controller
 
         $submission->update(['prescription' => "{$folder}/{$fileName}"]);
 
-        return response()->json(['message' => 'File uploaded'], 200);
+        return response()->json(['message' => 'File uploaded', 'url' => $submission->prescription], 200);
     }
 
     public function delete(DigitalOceanDeleteRequest $request)
