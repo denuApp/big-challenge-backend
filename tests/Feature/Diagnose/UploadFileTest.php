@@ -41,7 +41,6 @@ class UploadFileTest extends TestCase
 
         $submission->refresh();
 
-        // Assert the file was stored...
         Storage::disk('do')->assertExists($submission->prescription);
     }
 }
