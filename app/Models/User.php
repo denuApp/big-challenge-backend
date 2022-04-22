@@ -43,6 +43,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function getAvatarAttribute($value)
+    {
+        return 'https://'.config('filesystems.disks.do.bucket').'.'.config('filesystems.disks.do.region').'.cdn.digitaloceanspaces.com/'.$value;
+    }
+
     public function submission()
     {
         return $this->hasMany(Submission::class);
