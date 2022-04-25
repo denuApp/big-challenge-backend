@@ -34,7 +34,7 @@ class DoSpacesController extends Controller
 
         $submission->update(['prescription' => "{$folder}/{$fileName}"]);
 
-//        Diagnosed::dispatch($submission);
+        Diagnosed::dispatch($submission);
 
         return response()->json(['message' => 'File uploaded', 'url' => $submission->prescription], 200);
     }
