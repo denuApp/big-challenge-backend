@@ -7,6 +7,7 @@ use App\Http\Requests\DigitalOceanDeleteRequest;
 use App\Http\Requests\DigitalOceanStoreRequest;
 use App\Http\Requests\DigitalOceanUpdateRequest;
 use App\Models\Submission;
+use App\Providers\Diagnosed;
 use App\Services\CdnService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -32,6 +33,8 @@ class DoSpacesController extends Controller
         );
 
         $submission->update(['prescription' => "{$folder}/{$fileName}"]);
+
+//        Diagnosed::dispatch($submission);
 
         return response()->json(['message' => 'File uploaded', 'url' => $submission->prescription], 200);
     }
