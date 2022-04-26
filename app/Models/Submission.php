@@ -12,12 +12,6 @@ class Submission extends Model
 
     protected $guarded = [];
 
-    public function routeNotificationForMail($notification)
-    {
-        // Return email address and name...
-        return [$this->patient->email => $this->patient->name];
-    }
-
     public function patient()
     {
         return $this->belongsTo(User::class, 'patient_id', 'id');

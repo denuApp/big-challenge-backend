@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Notifications\PrescriptionUploaded;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -25,6 +26,8 @@ class SendNotificationOfPrescription implements ShouldQueue
      */
     public function handle(Diagnosed $event)
     {
-        $event->submission->notify(new PrescriptionUploaded($event->submission));
+        $user = User::find($event->submission->patient_id);
+
+        $user->notify(new PrescriptionUploaded($event->submission));
     }
 }
