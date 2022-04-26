@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Storage;
 
 class PrescriptionUploaded extends Notification implements ShouldQueue
 {
@@ -48,7 +49,7 @@ class PrescriptionUploaded extends Notification implements ShouldQueue
         return (new MailMessage)
             ->greeting('Hello!')
             ->line('One of your submission has been diagnosed.')
-            ->action('View Prescription', $prescription)
+            ->action('View Prescription', Storage::disk('do')->url($prescription))
             ->line('Thank you for using our application!');
     }
 
