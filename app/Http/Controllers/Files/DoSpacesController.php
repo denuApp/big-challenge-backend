@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Files;
 
+use App\Events\Diagnosed;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DigitalOceanDeleteRequest;
 use App\Http\Requests\DigitalOceanStoreRequest;
 use App\Http\Requests\DigitalOceanUpdateRequest;
 use App\Models\Submission;
-use App\Providers\Diagnosed;
 use App\Services\CdnService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;

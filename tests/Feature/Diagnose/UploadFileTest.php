@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Diagnose;
 
+use App\Events\Diagnosed;
 use App\Models\Submission;
 use App\Models\User;
-use App\Providers\Diagnosed;
 use Database\Seeders\UserPermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Providers;
+namespace App\Listeners;
 
+use App\Events\Diagnosed;
 use App\Models\User;
 use App\Notifications\PrescriptionUploaded;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -21,7 +22,7 @@ class SendNotificationOfPrescription implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param  \App\Providers\Diagnosed  $event
+     * @param  \App\Events\Diagnosed  $event
      * @return void
      */
     public function handle(Diagnosed $event)

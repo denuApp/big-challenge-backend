@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace App\Events;
 
 use App\Models\Submission;
 use Illuminate\Broadcasting\InteractsWithSockets;
