@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Files;
 
+use App\Events\Diagnosed;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DigitalOceanDeleteRequest;
 use App\Http\Requests\DigitalOceanStoreRequest;
@@ -32,6 +33,8 @@ class DoSpacesController extends Controller
         );
 
         $submission->update(['prescription' => "{$folder}/{$fileName}"]);
+
+        Diagnosed::dispatch($submission);
 
         return response()->json(['message' => 'File uploaded', 'url' => $submission->prescription], 200);
     }

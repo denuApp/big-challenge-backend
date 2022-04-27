@@ -2,11 +2,13 @@
 
 namespace Tests\Feature\Diagnose;
 
+use App\Events\Diagnosed;
 use App\Models\Submission;
 use App\Models\User;
 use Database\Seeders\UserPermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
@@ -20,6 +22,8 @@ class UploadFileTest extends TestCase
         $this->markTestSkipped('upload file test not working');
 
         $this->withoutExceptionHandling();
+
+        Event::fake();
 
         $this->seed(UserPermissionsSeeder::class);
 
@@ -46,6 +50,8 @@ class UploadFileTest extends TestCase
         $submission->refresh();
 
         Storage::disk('do')->assertExists($submission->prescription);
+
+        Event::assertDispatched(Diagnosed::class);
     }
 
     public function test_diagnose_uploading_by_patient()
